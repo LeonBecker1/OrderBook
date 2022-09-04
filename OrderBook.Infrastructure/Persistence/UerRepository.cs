@@ -10,6 +10,7 @@ using OrderBook.Domain.Entities;
 namespace OrderBook.Infrastructure.Persistence;
 
 public class UerRepository : Repository<User>, IUserRepository
+
 {
     private readonly DbContext _context = null!;
 
