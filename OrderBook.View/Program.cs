@@ -1,4 +1,14 @@
+using OrderBook.Infrastructure;
+using OrderBook.Application;
+
 var builder = WebApplication.CreateBuilder(args);
+{
+    builder.Services
+        .AddApplication()
+        .AddInfrastructure();
+
+}
+
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

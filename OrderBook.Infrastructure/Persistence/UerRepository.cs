@@ -9,12 +9,12 @@ using OrderBook.Domain.Entities;
 
 namespace OrderBook.Infrastructure.Persistence;
 
-public class UerRepository : Repository<User>, IUserRepository
+public class UserRepository : Repository<User>, IUserRepository
 
 {
     private readonly DbContext _context = null!;
 
-    public UerRepository(DbContext context) : base(context)
+    public UserRepository(DbContext context) : base(context)
     {
     }
 }
