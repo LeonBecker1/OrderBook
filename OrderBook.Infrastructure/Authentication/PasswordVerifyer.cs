@@ -6,6 +6,6 @@ using System.Threading.Tasks;
 
 namespace OrderBook.Infrastructure.Authentication;
 
-public class PasswordVerifyer
+public class PasswordVerifyer : IPasswordverifyer
 {
 }
