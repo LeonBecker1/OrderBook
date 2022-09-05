@@ -1,4 +1,14 @@
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using OrderBook.View.Data;
 var builder = WebApplication.CreateBuilder(args);
+var connectionString = builder.Configuration.GetConnectionString("OrderBookViewContextConnection") ?? throw new InvalidOperationException("Connection string 'OrderBookViewContextConnection' not found.");
+
+builder.Services.AddDbContext<OrderBookViewContext>(options =>
+    options.UseSqlServer(connectionString));
+
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddEntityFrameworkStores<OrderBookViewContext>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -17,6 +27,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+app.UseAuthentication();;
 
 app.UseAuthorization();
 
