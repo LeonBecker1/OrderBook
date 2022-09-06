@@ -19,7 +19,9 @@ public class UnitofWork : IUnitofWork
         Orders      = new OrderRepository(_context);
         Users       = new UserRepository(_context);
         Stocks      = new StockRepository(_context);
+        Sales       = new SaleRepository(_context);
         Portfolios  = new PortfolioRepository(_context);
+        
     }
 
     public IOrderRepository Orders { get; private set; }    
@@ -27,6 +29,8 @@ public class UnitofWork : IUnitofWork
     public IUserRepository Users   { get; private set; }
 
     public IStockRepository Stocks { get; private set; }
+
+    public ISaleRepository Sales { get; private set; }
 
     public IPortfolioRepository Portfolios { get; private set; }
 

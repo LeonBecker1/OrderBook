@@ -11,6 +11,14 @@ namespace OrderBook.Infrastructure.Persistence.Models;
 
 public class PositionModel
 {
+
+    /* public PositionModel(int positionId, uint quantity, StockModel stock)
+    {
+        PositionId = positionId;
+        Quantity = quantity;
+        Stock = stock;
+    } */
+
     [Key]
     [Column("Position_Id")]
     public int PositionId { get; set; }

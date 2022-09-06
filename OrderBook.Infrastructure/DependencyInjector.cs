@@ -19,6 +19,7 @@ public static class DependenyInjector
         services.AddScoped<DbContext, OrderBookDBContext>();
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IPortfolioRepository, PortfolioRepository>();
+        services.AddScoped<ISaleRepository, SaleRepository>();
         services.AddScoped<IOrderRepository, OrderRepository>();
         services.AddScoped<IStockRepository, StockRepository>();
         services.AddScoped<IAuthenticationservice, AuthenticationService>();

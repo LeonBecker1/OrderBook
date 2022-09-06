@@ -10,7 +10,7 @@ public partial class UserModel
 {
     
 
-    /* public UserModel(int userId, string userName, decimal balance, byte[] password, ICollection<OrderModel> orders, PortfolioModel portfolio)
+    /*public UserModel(int userId, string userName, decimal balance, byte[] password, ICollection<OrderModel> orders, PortfolioModel portfolio)
     {
         UserId = userId;
         UserName = userName;

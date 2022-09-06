@@ -9,10 +9,9 @@ namespace OrderBook.Infrastructure.Persistence.Models;
 public partial class PortfolioModel
 {
 
-    /* public PortfolioModel(int portfolioId, UserModel user, ICollection<PositionModel> positions)
+    /* public PortfolioModel(int portfolioId, ICollection<PositionModel> positions)
     {
         PortfolioId = portfolioId;
-        User        = user;
         Positions   = positions;
     } */
 

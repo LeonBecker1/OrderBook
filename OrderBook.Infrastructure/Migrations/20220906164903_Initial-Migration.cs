@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace OrderBook.Infrastructure.Migrations
 {
-    public partial class InitialMigrate : Migration
+    public partial class InitialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -110,6 +110,40 @@ namespace OrderBook.Infrastructure.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Sales",
+                columns: table => new
+                {
+                    Sale_Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Execution_Time = table.Column<DateTime>(type: "Datetime", nullable: false),
+                    UnderlyingStockId = table.Column<int>(type: "int", nullable: false),
+                    BuyerUserId = table.Column<int>(type: "int", nullable: false),
+                    SellerUserId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Sales", x => x.Sale_Id);
+                    table.ForeignKey(
+                        name: "FK_Sales_Stocks_UnderlyingStockId",
+                        column: x => x.UnderlyingStockId,
+                        principalTable: "Stocks",
+                        principalColumn: "Stock_Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Sales_Users_BuyerUserId",
+                        column: x => x.BuyerUserId,
+                        principalTable: "Users",
+                        principalColumn: "User_Id",
+                        onDelete: ReferentialAction.NoAction);
+                    table.ForeignKey(
+                        name: "FK_Sales_Users_SellerUserId",
+                        column: x => x.SellerUserId,
+                        principalTable: "Users",
+                        principalColumn: "User_Id",
+                        onDelete: ReferentialAction.NoAction);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Orders_IssuerUserId",
                 table: "Orders",
@@ -131,6 +165,21 @@ namespace OrderBook.Infrastructure.Migrations
                 column: "StockId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Sales_BuyerUserId",
+                table: "Sales",
+                column: "BuyerUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Sales_SellerUserId",
+                table: "Sales",
+                column: "SellerUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Sales_UnderlyingStockId",
+                table: "Sales",
+                column: "UnderlyingStockId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Users_PortfolioId",
                 table: "Users",
                 column: "PortfolioId");
@@ -145,10 +194,13 @@ namespace OrderBook.Infrastructure.Migrations
                 name: "PositionModel");
 
             migrationBuilder.DropTable(
-                name: "Users");
+                name: "Sales");
 
             migrationBuilder.DropTable(
                 name: "Stocks");
+
+            migrationBuilder.DropTable(
+                name: "Users");
 
             migrationBuilder.DropTable(
                 name: "Portfolios");

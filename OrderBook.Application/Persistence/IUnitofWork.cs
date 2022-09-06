@@ -12,6 +12,7 @@ public interface IUnitofWork : IDisposable
     IUserRepository Users { get; }
     IStockRepository Stocks { get; }
     IPortfolioRepository Portfolios { get; }
+    ISaleRepository Sales { get; }
 
     int Complete();
 

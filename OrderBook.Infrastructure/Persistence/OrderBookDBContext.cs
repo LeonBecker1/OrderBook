@@ -16,6 +16,8 @@ public class OrderBookDBContext : DbContext
 
     public DbSet<StockModel> Stocks { get; set; } = null!;
 
+    public DbSet<SaleModel> Sales   { get; set; } = null!;
+
     public DbSet<PortfolioModel> Portfolios { get; set; } = null!;
 
     protected override void OnConfiguring(DbContextOptionsBuilder builder)

@@ -96,6 +96,39 @@ namespace OrderBook.Infrastructure.Migrations
                     b.ToTable("PositionModel");
                 });
 
+            modelBuilder.Entity("OrderBook.Infrastructure.Persistence.Models.SaleModel", b =>
+                {
+                    b.Property<int>("SaleId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("Sale_Id");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SaleId"), 1L, 1);
+
+                    b.Property<int>("BuyerUserId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("ExecutionTime")
+                        .HasColumnType("Datetime")
+                        .HasColumnName("Execution_Time");
+
+                    b.Property<int>("SellerUserId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UnderlyingStockId")
+                        .HasColumnType("int");
+
+                    b.HasKey("SaleId");
+
+                    b.HasIndex("BuyerUserId");
+
+                    b.HasIndex("SellerUserId");
+
+                    b.HasIndex("UnderlyingStockId");
+
+                    b.ToTable("Sales");
+                });
+
             modelBuilder.Entity("OrderBook.Infrastructure.Persistence.Models.StockModel", b =>
                 {
                     b.Property<int>("StockId")
@@ -180,6 +213,33 @@ namespace OrderBook.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("Stock");
+                });
+
+            modelBuilder.Entity("OrderBook.Infrastructure.Persistence.Models.SaleModel", b =>
+                {
+                    b.HasOne("OrderBook.Infrastructure.Persistence.Models.UserModel", "Buyer")
+                        .WithMany()
+                        .HasForeignKey("BuyerUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("OrderBook.Infrastructure.Persistence.Models.UserModel", "Seller")
+                        .WithMany()
+                        .HasForeignKey("SellerUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("OrderBook.Infrastructure.Persistence.Models.StockModel", "Underlying")
+                        .WithMany()
+                        .HasForeignKey("UnderlyingStockId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Buyer");
+
+                    b.Navigation("Seller");
+
+                    b.Navigation("Underlying");
                 });
 
             modelBuilder.Entity("OrderBook.Infrastructure.Persistence.Models.UserModel", b =>
