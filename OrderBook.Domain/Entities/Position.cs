@@ -13,4 +13,6 @@ public class Position
     public uint Quantity { get; set; }
 
     public Stock Stock { get; set; } = null!;
+
+    public Portfolio Portfolio { get; set; } = null!;
 }

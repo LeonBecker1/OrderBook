@@ -9,8 +9,8 @@ namespace OrderBook.Infrastructure.Persistence.Models;
 public partial class UserModel
 {
     
-
-    /*public UserModel(int userId, string userName, decimal balance, byte[] password, ICollection<OrderModel> orders, PortfolioModel portfolio)
+    
+    public UserModel(int userId, string userName, decimal balance, byte[] password, ICollection<OrderModel> orders, PortfolioModel portfolio)
     {
         UserId = userId;
         UserName = userName;
@@ -18,7 +18,7 @@ public partial class UserModel
         Password = password;
         Orders = orders;
         Portfolio = portfolio;
-    } */
+    } 
 
     [Key]
     [Column("User_Id")]

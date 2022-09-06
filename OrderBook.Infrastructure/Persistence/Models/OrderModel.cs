@@ -8,15 +8,16 @@ namespace OrderBook.Infrastructure.Persistence.Models;
 
 public partial class OrderModel
 {
-
-    /*public OrderModel(int orderId, bool isBuyOrder, decimal price, StockModel underlying, UserModel issuer)
+    
+    public OrderModel(int orderId, bool isBuyOrder, decimal price, uint quantity, StockModel underlying, UserModel issuer)
     {
         OrderId     = orderId;
         IsBuyOrder  = isBuyOrder;
         Price       = price;
+        Quantity    = quantity;
         Underlying  = underlying;
         Issuer      = issuer;
-    } */
+    } 
 
     [Key]
     [Column("Order_Id")]
@@ -29,6 +30,11 @@ public partial class OrderModel
     [Required]
     [Column("Price", TypeName = "decimal(6,2)")]
     public decimal Price { get; set; }
+
+    [Required]
+    [Column("Quantity")]
+    public uint Quantity { get; set; }
+
 
     [Required]
     [Column("Issuer")]

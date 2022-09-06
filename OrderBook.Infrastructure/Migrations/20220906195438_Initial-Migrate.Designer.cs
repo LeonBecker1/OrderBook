@@ -12,8 +12,8 @@ using OrderBook.Infrastructure.Persistence;
 namespace OrderBook.Infrastructure.Migrations
 {
     [DbContext(typeof(OrderBookDBContext))]
-    [Migration("20220906164903_Initial-Migration")]
-    partial class InitialMigration
+    [Migration("20220906195438_Initial-Migrate")]
+    partial class InitialMigrate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -43,6 +43,10 @@ namespace OrderBook.Infrastructure.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(6,2)")
                         .HasColumnName("Price");
+
+                    b.Property<long>("Quantity")
+                        .HasColumnType("bigint")
+                        .HasColumnName("Quantity");
 
                     b.Property<int>("UnderlyingStockId")
                         .HasColumnType("int");
@@ -79,7 +83,7 @@ namespace OrderBook.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PositionId"), 1L, 1);
 
-                    b.Property<int?>("PortfolioModelPortfolioId")
+                    b.Property<int>("PortfolioId")
                         .HasColumnType("int");
 
                     b.Property<long>("Quantity")
@@ -91,11 +95,11 @@ namespace OrderBook.Infrastructure.Migrations
 
                     b.HasKey("PositionId");
 
-                    b.HasIndex("PortfolioModelPortfolioId");
+                    b.HasIndex("PortfolioId");
 
                     b.HasIndex("StockId");
 
-                    b.ToTable("PositionModel");
+                    b.ToTable("Positions");
                 });
 
             modelBuilder.Entity("OrderBook.Infrastructure.Persistence.Models.SaleModel", b =>
@@ -204,15 +208,19 @@ namespace OrderBook.Infrastructure.Migrations
 
             modelBuilder.Entity("OrderBook.Infrastructure.Persistence.Models.PositionModel", b =>
                 {
-                    b.HasOne("OrderBook.Infrastructure.Persistence.Models.PortfolioModel", null)
-                        .WithMany("Positions")
-                        .HasForeignKey("PortfolioModelPortfolioId");
+                    b.HasOne("OrderBook.Infrastructure.Persistence.Models.PortfolioModel", "Portfolio")
+                        .WithMany()
+                        .HasForeignKey("PortfolioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("OrderBook.Infrastructure.Persistence.Models.StockModel", "Stock")
                         .WithMany()
                         .HasForeignKey("StockId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Portfolio");
 
                     b.Navigation("Stock");
                 });
@@ -253,11 +261,6 @@ namespace OrderBook.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("Portfolio");
-                });
-
-            modelBuilder.Entity("OrderBook.Infrastructure.Persistence.Models.PortfolioModel", b =>
-                {
-                    b.Navigation("Positions");
                 });
 
             modelBuilder.Entity("OrderBook.Infrastructure.Persistence.Models.StockModel", b =>

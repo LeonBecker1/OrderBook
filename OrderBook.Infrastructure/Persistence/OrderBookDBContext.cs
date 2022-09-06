@@ -20,6 +20,8 @@ public class OrderBookDBContext : DbContext
 
     public DbSet<PortfolioModel> Portfolios { get; set; } = null!;
 
+    public DbSet<PositionModel> Positions { get; set; } = null!;
+
     protected override void OnConfiguring(DbContextOptionsBuilder builder)
     {
         builder.UseSqlServer(@"Data Source=LEON-PC\SQLEXPRESS; Initial Catalog=OrderBookDB;Integrated Security=True;");

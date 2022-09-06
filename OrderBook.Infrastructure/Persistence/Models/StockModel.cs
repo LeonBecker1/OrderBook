@@ -8,12 +8,12 @@ namespace OrderBook.Infrastructure.Persistence.Models;
 
 public class StockModel
 {
-    /* public StockModel(int stockId, string abreviation, ICollection<OrderModel> orders)
+    public StockModel(int stockId, string abreviation, ICollection<OrderModel> orders)
     {
         StockId     = stockId;
         Abreviation = abreviation;
         Orders      = orders;
-    } */
+    } 
 
     [Key]
     [Column("Stock_Id")]

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace OrderBook.Infrastructure.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class InitialMigrate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -57,25 +57,26 @@ namespace OrderBook.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "PositionModel",
+                name: "Positions",
                 columns: table => new
                 {
                     Position_Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Quantity = table.Column<long>(type: "bigint", nullable: false),
                     StockId = table.Column<int>(type: "int", nullable: false),
-                    PortfolioModelPortfolioId = table.Column<int>(type: "int", nullable: true)
+                    PortfolioId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PositionModel", x => x.Position_Id);
+                    table.PrimaryKey("PK_Positions", x => x.Position_Id);
                     table.ForeignKey(
-                        name: "FK_PositionModel_Portfolios_PortfolioModelPortfolioId",
-                        column: x => x.PortfolioModelPortfolioId,
+                        name: "FK_Positions_Portfolios_PortfolioId",
+                        column: x => x.PortfolioId,
                         principalTable: "Portfolios",
-                        principalColumn: "Portfolio_Id");
+                        principalColumn: "Portfolio_Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_PositionModel_Stocks_StockId",
+                        name: "FK_Positions_Stocks_StockId",
                         column: x => x.StockId,
                         principalTable: "Stocks",
                         principalColumn: "Stock_Id",
@@ -90,6 +91,7 @@ namespace OrderBook.Infrastructure.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Is_Buy_Order = table.Column<bool>(type: "BIT", nullable: false),
                     Price = table.Column<decimal>(type: "decimal(6,2)", nullable: false),
+                    Quantity = table.Column<long>(type: "bigint", nullable: false),
                     IssuerUserId = table.Column<int>(type: "int", nullable: false),
                     UnderlyingStockId = table.Column<int>(type: "int", nullable: false)
                 },
@@ -155,13 +157,13 @@ namespace OrderBook.Infrastructure.Migrations
                 column: "UnderlyingStockId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PositionModel_PortfolioModelPortfolioId",
-                table: "PositionModel",
-                column: "PortfolioModelPortfolioId");
+                name: "IX_Positions_PortfolioId",
+                table: "Positions",
+                column: "PortfolioId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PositionModel_StockId",
-                table: "PositionModel",
+                name: "IX_Positions_StockId",
+                table: "Positions",
                 column: "StockId");
 
             migrationBuilder.CreateIndex(
@@ -191,7 +193,7 @@ namespace OrderBook.Infrastructure.Migrations
                 name: "Orders");
 
             migrationBuilder.DropTable(
-                name: "PositionModel");
+                name: "Positions");
 
             migrationBuilder.DropTable(
                 name: "Sales");

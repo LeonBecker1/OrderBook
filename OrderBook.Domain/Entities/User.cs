@@ -8,6 +8,17 @@ namespace OrderBook.Domain.Entities;
 
 public class User
 {
+
+    public User(int userId, string userName, byte[] password, decimal balance, List<Order>? orders, Portfolio portfolio)
+    {
+        UserId = userId;
+        UserName = userName;
+        Password = password;
+        Balance = balance;
+        Orders = orders;
+        Portfolio = portfolio;
+    }
+
     public int UserId { get; set; }
     public string UserName { get; set; } = null!;
     public byte[] Password { get; set; } = null!;
