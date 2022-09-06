@@ -16,7 +16,7 @@ public static class DependenyInjector
 {
     public static IServiceCollection AddInfrastructure(this IServiceCollection services)
     {
-        services.AddScoped<DbContext, XchangeDBContext>();
+        services.AddScoped<DbContext, OrderBookDBContext>();
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IPortfolioRepository, PortfolioRepository>();
         services.AddScoped<IOrderRepository, OrderRepository>();

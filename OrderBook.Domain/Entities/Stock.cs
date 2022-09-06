@@ -12,5 +12,6 @@ public class Stock
 {
     public int StockId { get; set; }
     public string Abreviation { get; set; } = null!;
+    public List<Order>? Orders { get; set; }
 
 }

@@ -12,5 +12,5 @@ public class Portfolio
 {
     public int PortfolioId { get; set; }
     public User User { get; set; } = null!;
-    public Stock Stock { get; set; } = null!;
+    public List<Position>? Positions { get; set; }
 }

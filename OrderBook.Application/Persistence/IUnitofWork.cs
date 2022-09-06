@@ -4,9 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OrderBook.Application.Persistence
+namespace OrderBook.Application.Persistence;
+
+public interface IUnitofWork : IDisposable
 {
-    internal interface IUnitofWork
-    {
-    }
+    IOrderRepository Orders { get; }
+    IUserRepository Users { get; }
+    IStockRepository Stocks { get; }
+    IPortfolioRepository Portfolios { get; }
+
+    int Complete();
+
 }
