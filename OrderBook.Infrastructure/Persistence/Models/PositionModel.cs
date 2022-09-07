@@ -32,8 +32,6 @@ public class PositionModel
     [Column("Stock")]
     public StockModel Stock { get; set; } = null!;
 
-    [Required]
-    [Column("Portfolio")]
-    public PortfolioModel Portfolio { get; set; } = null!;
+
 
 }

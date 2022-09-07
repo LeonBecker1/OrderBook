@@ -20,4 +20,7 @@ public partial class PortfolioModel
     [Column("Portfolio_Id")]
     public int PortfolioId { get; set; }
 
+
+    public ICollection<PositionModel>? Positions { get; set; }
+
 }

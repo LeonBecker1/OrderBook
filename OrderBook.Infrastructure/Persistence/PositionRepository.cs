@@ -50,4 +50,16 @@ public class PositionRepository : Repository<Position>, IPositionRepository
         return position;
     } 
 
+    public async Task<List<Position>> FindbyPortfolio(Portfolio user)
+    {
+        PortfolioModel portfolio = _context.Set<PortfolioModel>().Find(user.UserId)!;
+        List<PositionModel> positions = await _context.Set<PositionModel>().Where(p => p.Portfolio == portfolio).ToListAsync();
+        List<Position> result = new List<Position>();
+        foreach (var position in positions)
+        {
+            Stock stock = new Stock()
+            result.Add(new Position(position.PositionId, position.Quantity,  )
+        }
+    }
+
 }

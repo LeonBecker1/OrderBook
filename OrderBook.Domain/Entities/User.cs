@@ -9,7 +9,7 @@ namespace OrderBook.Domain.Entities;
 public class User
 {
 
-    public User(int userId, string userName, byte[] password, decimal balance, List<Order>? orders, Portfolio portfolio)
+    public User(int userId, string userName, byte[] password, decimal balance, List<Order>? orders, Portfolio portfolio, List<Position>? positions)
     {
         UserId = userId;
         UserName = userName;
@@ -17,6 +17,7 @@ public class User
         Balance = balance;
         Orders = orders;
         Portfolio = portfolio;
+        Positions = positions;
     }
 
     public int UserId { get; set; }
@@ -25,5 +26,6 @@ public class User
     public decimal Balance { get; set; }
     public List<Order>? Orders { get; set; }
     public Portfolio Portfolio { get; set; } = null!;
+    public List<Position>? Positions { get; set; }
 
 }
