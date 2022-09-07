@@ -9,6 +9,10 @@ namespace OrderBook.Domain.Entities;
 public class Sale
 {
 
+   
+    public Sale(int saleId, DateTime, executionTime, S)
+
+
     public int SaleId { get; set; }
     public DateTime ExecutionTime { get; set; }
     public Stock Underlying { get; set; } = null!;

@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 using OrderBook.Domain.Entities;
 
 
-namespace OrderBook.Application.Persistence
+namespace OrderBook.Application.Persistence;
+
+public interface IStockRepository : IRepository<Stock>
 {
-    public interface IStockRepository : IRepository<Stock>
-    {
-    }
+
+    Task<List<Stock>> GetAll();
+
 }
