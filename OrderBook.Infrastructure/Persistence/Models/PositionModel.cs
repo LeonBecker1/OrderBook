@@ -12,12 +12,13 @@ namespace OrderBook.Infrastructure.Persistence.Models;
 public class PositionModel
 {
     
-    public PositionModel(int positionId, uint quantity, StockModel stock, PortfolioModel portfolio)
+    public PositionModel(int positionId, uint quantity, StockModel stock, PortfolioModel portfolio, int portfolioFK)
     {
-        Portfolio = portfolio;
-        PositionId = positionId;
-        Quantity = quantity;
-        Stock = stock;
+        Portfolio   = portfolio;
+        PositionId  = positionId;
+        Quantity    = quantity;
+        Stock       = stock;
+        PortfolioFK = portfolioFK;
     }  
 
     [Key]
@@ -33,5 +34,7 @@ public class PositionModel
     public StockModel Stock { get; set; } = null!;
 
 
+
+    public int PortfolioFK { get; set; }
 
 }

@@ -81,7 +81,7 @@ namespace OrderBook.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("PositionId"), 1L, 1);
 
-                    b.Property<int>("PortfolioId")
+                    b.Property<int>("PortfolioFK")
                         .HasColumnType("int");
 
                     b.Property<long>("Quantity")
@@ -93,7 +93,7 @@ namespace OrderBook.Infrastructure.Migrations
 
                     b.HasKey("PositionId");
 
-                    b.HasIndex("PortfolioId");
+                    b.HasIndex("PortfolioFK");
 
                     b.HasIndex("StockId");
 
@@ -109,14 +109,14 @@ namespace OrderBook.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SaleId"), 1L, 1);
 
-                    b.Property<int>("BuyerUserId")
+                    b.Property<int>("BuyerFk")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("ExecutionTime")
                         .HasColumnType("Datetime")
                         .HasColumnName("Execution_Time");
 
-                    b.Property<int>("SellerUserId")
+                    b.Property<int>("SellerFk")
                         .HasColumnType("int");
 
                     b.Property<int>("UnderlyingStockId")
@@ -124,9 +124,9 @@ namespace OrderBook.Infrastructure.Migrations
 
                     b.HasKey("SaleId");
 
-                    b.HasIndex("BuyerUserId");
+                    b.HasIndex("BuyerFk");
 
-                    b.HasIndex("SellerUserId");
+                    b.HasIndex("SellerFk");
 
                     b.HasIndex("UnderlyingStockId");
 
@@ -170,7 +170,7 @@ namespace OrderBook.Infrastructure.Migrations
                         .HasColumnType("Binary(64)")
                         .HasColumnName("Password");
 
-                    b.Property<int>("PortfolioId")
+                    b.Property<int>("PortfolioFK")
                         .HasColumnType("int");
 
                     b.Property<string>("UserName")
@@ -180,7 +180,7 @@ namespace OrderBook.Infrastructure.Migrations
 
                     b.HasKey("UserId");
 
-                    b.HasIndex("PortfolioId");
+                    b.HasIndex("PortfolioFK");
 
                     b.ToTable("Users");
                 });
@@ -194,7 +194,7 @@ namespace OrderBook.Infrastructure.Migrations
                         .IsRequired();
 
                     b.HasOne("OrderBook.Infrastructure.Persistence.Models.StockModel", "Underlying")
-                        .WithMany("Orders")
+                        .WithMany()
                         .HasForeignKey("UnderlyingStockId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -207,8 +207,8 @@ namespace OrderBook.Infrastructure.Migrations
             modelBuilder.Entity("OrderBook.Infrastructure.Persistence.Models.PositionModel", b =>
                 {
                     b.HasOne("OrderBook.Infrastructure.Persistence.Models.PortfolioModel", "Portfolio")
-                        .WithMany()
-                        .HasForeignKey("PortfolioId")
+                        .WithMany("Positions")
+                        .HasForeignKey("PortfolioFK")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -227,13 +227,13 @@ namespace OrderBook.Infrastructure.Migrations
                 {
                     b.HasOne("OrderBook.Infrastructure.Persistence.Models.UserModel", "Buyer")
                         .WithMany()
-                        .HasForeignKey("BuyerUserId")
+                        .HasForeignKey("BuyerFk")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("OrderBook.Infrastructure.Persistence.Models.UserModel", "Seller")
                         .WithMany()
-                        .HasForeignKey("SellerUserId")
+                        .HasForeignKey("SellerFk")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -254,16 +254,16 @@ namespace OrderBook.Infrastructure.Migrations
                 {
                     b.HasOne("OrderBook.Infrastructure.Persistence.Models.PortfolioModel", "Portfolio")
                         .WithMany()
-                        .HasForeignKey("PortfolioId")
+                        .HasForeignKey("PortfolioFK")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Portfolio");
                 });
 
-            modelBuilder.Entity("OrderBook.Infrastructure.Persistence.Models.StockModel", b =>
+            modelBuilder.Entity("OrderBook.Infrastructure.Persistence.Models.PortfolioModel", b =>
                 {
-                    b.Navigation("Orders");
+                    b.Navigation("Positions");
                 });
 
             modelBuilder.Entity("OrderBook.Infrastructure.Persistence.Models.UserModel", b =>

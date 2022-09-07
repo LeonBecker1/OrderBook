@@ -20,12 +20,12 @@ public class PositionRepository : Repository<Position>, IPositionRepository
     
     public async Task<Position> AddPosition(Position position)
     {
-        PortfolioModel portfolioModel = _context.Set<PortfolioModel>().Find(position.Portfolio.PortfolioId)!;
-        StockModel stockModel = _context.Set<StockModel>().Find(position.Stock.StockId)!;
-        PositionModel positionModel = new PositionModel(position.PositionId, position.Quantity, stockModel, portfolioModel);
+        PortfolioModel  portfolioModel  = _context.Set<PortfolioModel>().Find(position.Portfolio.PortfolioId)!;
+        StockModel      stockModel      = _context.Set<StockModel>().Find(position.Stock.StockId)!;
+        PositionModel   positionModel   = new PositionModel(position.PositionId, position.Quantity,
+                                                            stockModel, portfolioModel, portfolioModel.PortfolioId);
 
-        _context.Set<PositionModel>().Add(positionModel);
-        await _context.SaveChangesAsync();
+        await _context.Set<PositionModel>().AddAsync(positionModel);
         return position;
     }
 
@@ -41,14 +41,14 @@ public class PositionRepository : Repository<Position>, IPositionRepository
         return position;
     }
 
-    public async Task<Position> RemovePosition(Position position)
+    public async Task<Position> DeletePosition(Position position)
     {
         PositionModel positionModel = _context.Set<PositionModel>().Find(position.PositionId)!;
         _context.Set<PositionModel>().Remove(positionModel);
 
         await _context.SaveChangesAsync();
         return position;
-    } 
+    }  
 
     public async Task<List<Position>> FindbyPortfolio(Portfolio user)
     {

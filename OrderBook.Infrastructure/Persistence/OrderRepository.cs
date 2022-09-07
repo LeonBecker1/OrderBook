@@ -52,6 +52,7 @@ public class OrderRepository : Repository<Order>, IOrderRepository
 
     public async Task<List<Order>> FindByUnderlying(Stock stock)
     {
+<<<<<<< HEAD
         byte[] mockPw           = { 0 };
         Portfolio mockPortfolio = new Portfolio(0);
         User mockUser           = new User(0, "0", mockPw, 0, null!, mockPortfolio);
@@ -68,5 +69,34 @@ public class OrderRepository : Repository<Order>, IOrderRepository
         return orderList;
 
     } 
+=======
+        StockModel stockModel = _context.Set<StockModel>().Find(stock.StockId)!;
 
+        List<Order> orderList = new List<Order>();
+        List<OrderModel> orderModels = _context.Set<OrderModel>().Where(om => om.Underlying == stockModel).ToList();
+
+        foreach(OrderModel orderModel in orderModels)
+        {
+            orderList.Add(new Order(orderModel.OrderId, orderModel.IsBuyOrder, orderModel.Price, orderModel.Quantity, stock, null!));
+        }
+
+        await _context.SaveChangesAsync();
+        return orderList;
+>>>>>>> 0cb5a0790e60701dd6266b032bae49203292a4c4
+
+    }
+
+    public async Task<Order> DeleteOrder(Order order)
+    {
+        OrderModel orderModel = _context.Set<OrderModel>().Find(order.OrderId)!;
+        _context.Set<OrderModel>().Remove(orderModel);
+        await _context.SaveChangesAsync();
+
+        return order;
+    }
+
+    public Task<Order> RemoveOrder(Order order)
+    {
+        throw new NotImplementedException();
+    }
 }

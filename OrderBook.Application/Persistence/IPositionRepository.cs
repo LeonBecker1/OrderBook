@@ -9,4 +9,7 @@ namespace OrderBook.Application.Persistence;
 
 public interface IPositionRepository : IRepository<Position>
 {
+    Task<Position> AddPosition(Position position);
+    Task<Position> EditPosition(Position position, uint quantity);
+    Task<Position> DeletePosition(Position position);
 }
