@@ -10,4 +10,5 @@ namespace OrderBook.Application.Persistence;
 
 public interface IUserRepository : IRepository<User>
 {
+    Task<User> AddUser(User user);
 }

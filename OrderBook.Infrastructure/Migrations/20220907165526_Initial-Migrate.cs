@@ -43,14 +43,14 @@ namespace OrderBook.Infrastructure.Migrations
                     User_Name = table.Column<string>(type: "Varchar(32)", nullable: false),
                     Balance = table.Column<decimal>(type: "Decimal(6,2)", nullable: false),
                     Password = table.Column<byte[]>(type: "Binary(64)", nullable: false),
-                    PortfolioId = table.Column<int>(type: "int", nullable: false)
+                    PortfolioFK = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Users", x => x.User_Id);
                     table.ForeignKey(
-                        name: "FK_Users_Portfolios_PortfolioId",
-                        column: x => x.PortfolioId,
+                        name: "FK_Users_Portfolios_PortfolioFK",
+                        column: x => x.PortfolioFK,
                         principalTable: "Portfolios",
                         principalColumn: "Portfolio_Id",
                         onDelete: ReferentialAction.Cascade);
@@ -64,14 +64,14 @@ namespace OrderBook.Infrastructure.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Quantity = table.Column<long>(type: "bigint", nullable: false),
                     StockId = table.Column<int>(type: "int", nullable: false),
-                    PortfolioId = table.Column<int>(type: "int", nullable: false)
+                    PortfolioFK = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Positions", x => x.Position_Id);
                     table.ForeignKey(
-                        name: "FK_Positions_Portfolios_PortfolioId",
-                        column: x => x.PortfolioId,
+                        name: "FK_Positions_Portfolios_PortfolioFK",
+                        column: x => x.PortfolioFK,
                         principalTable: "Portfolios",
                         principalColumn: "Portfolio_Id",
                         onDelete: ReferentialAction.Cascade);
@@ -120,8 +120,8 @@ namespace OrderBook.Infrastructure.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Execution_Time = table.Column<DateTime>(type: "Datetime", nullable: false),
                     UnderlyingStockId = table.Column<int>(type: "int", nullable: false),
-                    BuyerUserId = table.Column<int>(type: "int", nullable: false),
-                    SellerUserId = table.Column<int>(type: "int", nullable: false)
+                    BuyerFk = table.Column<int>(type: "int", nullable: false),
+                    SellerFk = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -133,14 +133,14 @@ namespace OrderBook.Infrastructure.Migrations
                         principalColumn: "Stock_Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Sales_Users_BuyerUserId",
-                        column: x => x.BuyerUserId,
+                        name: "FK_Sales_Users_BuyerFk",
+                        column: x => x.BuyerFk,
                         principalTable: "Users",
                         principalColumn: "User_Id",
                         onDelete: ReferentialAction.NoAction);
                     table.ForeignKey(
-                        name: "FK_Sales_Users_SellerUserId",
-                        column: x => x.SellerUserId,
+                        name: "FK_Sales_Users_SellerFk",
+                        column: x => x.SellerFk,
                         principalTable: "Users",
                         principalColumn: "User_Id",
                         onDelete: ReferentialAction.NoAction);
@@ -157,9 +157,9 @@ namespace OrderBook.Infrastructure.Migrations
                 column: "UnderlyingStockId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Positions_PortfolioId",
+                name: "IX_Positions_PortfolioFK",
                 table: "Positions",
-                column: "PortfolioId");
+                column: "PortfolioFK");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Positions_StockId",
@@ -167,14 +167,14 @@ namespace OrderBook.Infrastructure.Migrations
                 column: "StockId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Sales_BuyerUserId",
+                name: "IX_Sales_BuyerFk",
                 table: "Sales",
-                column: "BuyerUserId");
+                column: "BuyerFk");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Sales_SellerUserId",
+                name: "IX_Sales_SellerFk",
                 table: "Sales",
-                column: "SellerUserId");
+                column: "SellerFk");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Sales_UnderlyingStockId",
@@ -182,9 +182,9 @@ namespace OrderBook.Infrastructure.Migrations
                 column: "UnderlyingStockId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Users_PortfolioId",
+                name: "IX_Users_PortfolioFK",
                 table: "Users",
-                column: "PortfolioId");
+                column: "PortfolioFK");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

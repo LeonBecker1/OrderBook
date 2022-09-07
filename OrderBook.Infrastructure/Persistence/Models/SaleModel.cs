@@ -10,6 +10,18 @@ namespace OrderBook.Infrastructure.Persistence.Models;
 
 public class SaleModel
 {
+
+    public SaleModel(int saleId, DateTime executionTime, StockModel underlying, UserModel buyer, int buyerFk, UserModel seller, int sellerFk)
+    {
+        SaleId          = saleId;
+        ExecutionTime   = executionTime;
+        Underlying      = underlying;
+        Buyer           = buyer;
+        BuyerFk         = buyerFk;
+        Seller          = seller;
+        SellerFk        = sellerFk;
+    }
+
     [Key]
     [Column("Sale_Id")]
     public int SaleId { get; set; }
@@ -24,6 +36,12 @@ public class SaleModel
     [Required]
     public UserModel Buyer { get; set; } = null!;
 
+    [ForeignKey("Buyer")]
+    public int BuyerFk { get; set; }
+
     [Required]
     public UserModel Seller { get; set; } = null!;
+
+    [ForeignKey("Seller")]
+    public int SellerFk { get; set; }
 }

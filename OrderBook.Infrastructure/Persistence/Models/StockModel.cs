@@ -8,11 +8,10 @@ namespace OrderBook.Infrastructure.Persistence.Models;
 
 public class StockModel
 {
-    public StockModel(int stockId, string abreviation, ICollection<OrderModel> orders)
+    public StockModel(int stockId, string abreviation)
     {
         StockId     = stockId;
         Abreviation = abreviation;
-        Orders      = orders;
     } 
 
     [Key]
@@ -23,5 +22,4 @@ public class StockModel
     [Column("Abreviation", TypeName = "Varchar(8)")]
     public string Abreviation { get; set; } = null!;
 
-    public ICollection<OrderModel>? Orders { get; set; }
 }

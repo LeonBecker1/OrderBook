@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace OrderBook.Infrastructure.Persistence.Models;
 
@@ -10,14 +11,16 @@ public partial class UserModel
 {
     
     
-    public UserModel(int userId, string userName, decimal balance, byte[] password, ICollection<OrderModel> orders, PortfolioModel portfolio)
+    public UserModel(int userId, string userName, decimal balance, byte[] password, 
+                     ICollection<OrderModel> orders, PortfolioModel portfolio, int portfolioFK)
     {
-        UserId = userId;
-        UserName = userName;
-        Balance = balance;
-        Password = password;
-        Orders = orders;
-        Portfolio = portfolio;
+        UserId      = userId;
+        UserName    = userName;
+        Balance     = balance;
+        Password    = password;
+        Orders      = orders;
+        Portfolio   = portfolio;
+        PortfolioFK = portfolioFK;
     } 
 
     [Key]
@@ -40,6 +43,9 @@ public partial class UserModel
     [Required]
     [Column("Portfolio")]
     public PortfolioModel Portfolio { get; set; } = null!;
+
+    [ForeignKey("Portfolio")]
+    public int PortfolioFK { get; set; }
 
     
 }

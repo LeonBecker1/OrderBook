@@ -20,10 +20,12 @@ public class UserRepository : Repository<User>, IUserRepository
     }
 
     
-    public async Task<User> AddNewUser(User user)
-    {   
-        PortfolioModel portfolioModel = new PortfolioModel(user.UserId);
-        UserModel userModel = new UserModel(user.UserId, user.UserName, user.Balance, user.Password, null, portfolioModel);
+    public async Task<User> AddUser(User user)
+    {
+        List<PositionModel> positions = new List<PositionModel>();
+        PortfolioModel portfolioModel = new PortfolioModel(user.UserId, positions);
+        UserModel           userModel = new UserModel(user.UserId, user.UserName, user.Balance, user.Password, null!,
+                                                      portfolioModel, portfolioModel.PortfolioId);
 
         await _context.Set<UserModel>().AddAsync(userModel);
 

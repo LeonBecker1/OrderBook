@@ -9,4 +9,5 @@ namespace OrderBook.Application.Persistence;
 
 public interface ISaleRepository : IRepository<Sale>
 {
+    Task<Sale> AddSale(Sale sale);
 }

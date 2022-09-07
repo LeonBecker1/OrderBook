@@ -9,4 +9,9 @@ namespace OrderBook.Application.Persistence;
 
 public interface IOrderRepository : IRepository<Order>
 {
+
+    Task<Order> AddOrder(Order order);
+    Task<Order> EditOrder(Order order, uint quantity);
+    Task<Order> DeleteOrder(Order order);
+    Task<List<Order>> FindByUnderlying(Stock stock);
 }

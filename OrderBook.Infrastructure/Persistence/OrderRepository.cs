@@ -53,14 +53,31 @@ public class OrderRepository : Repository<Order>, IOrderRepository
     public async Task<List<Order>> FindByUnderlying(Stock stock)
     {
         StockModel stockModel = _context.Set<StockModel>().Find(stock.StockId)!;
-        List<Order> orderList = new List<Order>();
 
+        List<Order> orderList = new List<Order>();
         List<OrderModel> orderModels = _context.Set<OrderModel>().Where(om => om.Underlying == stockModel).ToList();
+
         foreach(OrderModel orderModel in orderModels)
         {
-            orderList.Add(new Order(orderModel.OrderId, orderModel.IsBuyOrder, orderModel.Price, orderModel.Quantity, stock, ))
+            orderList.Add(new Order(orderModel.OrderId, orderModel.IsBuyOrder, orderModel.Price, orderModel.Quantity, stock, null!));
         }
 
-    } 
+        await _context.SaveChangesAsync();
+        return orderList;
 
+    }
+
+    public async Task<Order> DeleteOrder(Order order)
+    {
+        OrderModel orderModel = _context.Set<OrderModel>().Find(order.OrderId)!;
+        _context.Set<OrderModel>().Remove(orderModel);
+        await _context.SaveChangesAsync();
+
+        return order;
+    }
+
+    public Task<Order> RemoveOrder(Order order)
+    {
+        throw new NotImplementedException();
+    }
 }
