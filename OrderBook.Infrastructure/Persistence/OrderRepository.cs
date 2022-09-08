@@ -52,24 +52,7 @@ public class OrderRepository : Repository<Order>, IOrderRepository
 
     public async Task<List<Order>> FindByUnderlying(Stock stock)
     {
-<<<<<<< HEAD
-        byte[] mockPw           = { 0 };
-        Portfolio mockPortfolio = new Portfolio(0);
-        User mockUser           = new User(0, "0", mockPw, 0, null!, mockPortfolio);
 
-        StockModel stockModel   = _context.Set<StockModel>().Find(stock.StockId)!;
-        List<Order> orderList   = new List<Order>();
-
-        List<OrderModel> orderModels = await _context.Set<OrderModel>().Where(om => om.Underlying == stockModel).ToListAsync();
-        foreach(OrderModel orderModel in orderModels)
-        {
-            orderList.Add(new Order(orderModel.OrderId, orderModel.IsBuyOrder, orderModel.Price, orderModel.Quantity, stock, mockUser));
-        }
-
-        return orderList;
-
-    } 
-=======
         StockModel stockModel = _context.Set<StockModel>().Find(stock.StockId)!;
 
         List<Order> orderList = new List<Order>();
@@ -82,7 +65,6 @@ public class OrderRepository : Repository<Order>, IOrderRepository
 
         await _context.SaveChangesAsync();
         return orderList;
->>>>>>> 0cb5a0790e60701dd6266b032bae49203292a4c4
 
     }
 

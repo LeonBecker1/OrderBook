@@ -18,9 +18,9 @@ public class PositionRepository : Repository<Position>, IPositionRepository
 
     }
     
-    public async Task<Position> AddPosition(Position position)
+    public async Task<Position> AddPosition(Position position, int PortfolioId)
     {
-        PortfolioModel  portfolioModel  = _context.Set<PortfolioModel>().Find(position.Portfolio.PortfolioId)!;
+        PortfolioModel  portfolioModel  = _context.Set<PortfolioModel>().Find(PortfolioId)!;
         StockModel      stockModel      = _context.Set<StockModel>().Find(position.Stock.StockId)!;
         PositionModel   positionModel   = new PositionModel(position.PositionId, position.Quantity,
                                                             stockModel, portfolioModel, portfolioModel.PortfolioId);
@@ -50,16 +50,21 @@ public class PositionRepository : Repository<Position>, IPositionRepository
         return position;
     }  
 
-    public async Task<List<Position>> FindbyPortfolio(Portfolio user)
+    public async Task<List<Position>> FindbyPortfolio(Portfolio portfolio)
     {
-        PortfolioModel portfolio = _context.Set<PortfolioModel>().Find(user.UserId)!;
-        List<PositionModel> positions = await _context.Set<PositionModel>().Where(p => p.Portfolio == portfolio).ToListAsync();
+        List<PositionModel> positions = _context.Set<PositionModel>()
+                                                      .Where(p => p.PortfolioFK == portfolio.PortfolioId).ToList();
+
         List<Position> result = new List<Position>();
         foreach (var position in positions)
         {
-            Stock stock = new Stock()
-            result.Add(new Position(position.PositionId, position.Quantity,  )
+            Stock stock = new Stock(position.Stock.StockId, position.Stock.Abreviation);
+            result.Add(new Position(position.PositionId, position.Quantity, stock));
         }
+
+        await _context.SaveChangesAsync();
+
+        return result;
     }
 
 }

@@ -10,8 +10,14 @@ public class Sale
 {
 
    
-    public Sale(int saleId, DateTime, executionTime, S)
-
+    public Sale(int saleId, DateTime executionTime, Stock underlying, User buyer, User seller)
+    {
+        SaleId        = saleId;
+        ExecutionTime = executionTime;
+        Underlying    = underlying;
+        Buyer         = buyer;
+        Seller        = seller;
+    }
 
     public int SaleId { get; set; }
     public DateTime ExecutionTime { get; set; }

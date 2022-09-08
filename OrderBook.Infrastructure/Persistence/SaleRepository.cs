@@ -37,7 +37,7 @@ public class SaleRepository : Repository<Sale>, ISaleRepository
                 StockModel s = new StockModel(position.Stock.StockId, position.Stock.Abreviation);
 
                 buyerPositions.Add(new PositionModel(position.PositionId, position.Quantity,  s, 
-                                   buyerPortfolio, position.Portfolio.PortfolioId));
+                                   buyerPortfolio, buyer.Portfolio.PortfolioId));
             }
         }
 
@@ -49,7 +49,7 @@ public class SaleRepository : Repository<Sale>, ISaleRepository
                 StockModel s = new StockModel(position.Stock.StockId, position.Stock.Abreviation);
 
                 buyerPositions.Add(new PositionModel(position.PositionId, position.Quantity, s,
-                                    sellerPortfolio, position.Portfolio.PortfolioId));
+                                    sellerPortfolio, seller.Portfolio.PortfolioId));
             }
         }
 

@@ -30,5 +30,17 @@ public class UserRepository : Repository<User>, IUserRepository
         await _context.Set<UserModel>().AddAsync(userModel);
 
         return user;
-    } 
+    }
+
+    public async Task<User> EditBalance(User user)
+    {
+        UserModel userModel = _context.Set<UserModel>().Find(user.UserId)!;
+        _context.Set<UserModel>().Remove(userModel);
+
+        userModel.Balance = user.Balance;
+        _context.Set<UserModel>().Add(userModel);
+
+        await _context.SaveChangesAsync();
+        return user;
+    }
 }
