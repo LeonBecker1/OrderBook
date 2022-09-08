@@ -8,4 +8,9 @@ namespace OrderBook.Application.Services.AuthenticationService;
 
 public interface IAuthenticationservice
 {
+    public void AuthenticateLogin(string username, byte[] password);
+
+    public void AuthenticateRegister(string username, byte[] password);
+
+
 }

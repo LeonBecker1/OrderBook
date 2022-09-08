@@ -13,7 +13,7 @@ public class Portfolio
     public Portfolio(int portfolioId, List<Position>? positions)
     {
         PortfolioId = portfolioId;
-        Positions = positions;
+        Positions   = positions;
     }
 
     public Portfolio(int portfolioId)

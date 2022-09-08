@@ -8,4 +8,5 @@ namespace OrderBook.Infrastructure.Authentication;
 
 public interface IPasswordverifyer
 {
+    bool passWordIsValid(byte[] password);
 }

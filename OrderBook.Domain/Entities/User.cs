@@ -11,11 +11,11 @@ public class User
 
     public User(int userId, string userName, byte[] password, decimal balance, List<Order>? orders, Portfolio portfolio, List<Position>? positions)
     {
-        UserId = userId;
-        UserName = userName;
-        Password = password;
-        Balance = balance;
-        Orders = orders;
+        UserId    = userId;
+        UserName  = userName;
+        Password  = password;
+        Balance   = balance;
+        Orders    = orders;
         Portfolio = portfolio;
         Positions = positions;
     }

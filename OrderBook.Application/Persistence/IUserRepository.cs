@@ -12,4 +12,6 @@ public interface IUserRepository : IRepository<User>
 {
     Task<User> AddUser(User user);
     Task<User> EditBalance(User user);
+    byte[] GetUserPassword(string userName);
+    bool HasUser(string userName);
 }

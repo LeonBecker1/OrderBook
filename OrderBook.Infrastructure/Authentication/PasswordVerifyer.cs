@@ -8,4 +8,10 @@ namespace OrderBook.Infrastructure.Authentication;
 
 public class PasswordVerifyer : IPasswordverifyer
 {
+
+    private readonly 
+    public bool passWordIsValid(byte[] password)
+    {
+        throw new NotImplementedException();
+    }
 }

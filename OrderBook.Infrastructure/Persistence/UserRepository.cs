@@ -43,4 +43,23 @@ public class UserRepository : Repository<User>, IUserRepository
         await _context.SaveChangesAsync();
         return user;
     }
+
+    public byte[] GetUserPassword(string userName)
+    {
+        List<UserModel> userModels =  _context.Set<UserModel>().Where( u => u.UserName == userName).ToList();
+
+        if(userModels is not null)
+        {
+            return userModels[0].Password;
+        }
+
+        return null!;
+    }
+
+    public bool HasUser(string userName)
+    {
+        List<UserModel> userModels = _context.Set<UserModel>().Where(u => u.UserName == userName).ToList();
+
+        return userModels is not null;
+    }
 }

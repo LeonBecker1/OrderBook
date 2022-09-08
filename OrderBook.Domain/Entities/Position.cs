@@ -12,8 +12,8 @@ public class Position
     public Position(int positionId, uint quantity, Stock stock)
     {
         PositionId = positionId;
-        Quantity = quantity;
-        Stock = stock;
+        Quantity   = quantity;
+        Stock      = stock;
     }
 
     public int PositionId { get; set; }

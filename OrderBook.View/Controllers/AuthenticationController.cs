@@ -1,6 +1,5 @@
-﻿namespace OrderBook.View.Controllers
+﻿namespace OrderBook.View.Controllers;
+
+public class AuthenticationController
 {
-    public class AuthenticationController
-    {
-    }
 }

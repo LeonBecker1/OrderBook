@@ -9,5 +9,5 @@ namespace OrderBook.Application.Services.MatchingService;
 
 public interface IMatchingEngine
 {
-    void Match(List<Order> orders);
+    Task<int> Match(List<Order> orders);
 }

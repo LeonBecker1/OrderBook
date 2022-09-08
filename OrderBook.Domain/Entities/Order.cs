@@ -13,12 +13,12 @@ public class Order
 
     public Order(int orderId, bool isBuyOrder, decimal price, uint quantity, Stock underlying, User issuer)
     {
-        OrderId = orderId;
-        IsBuyOrder = isBuyOrder;
-        Price = price;
-        Quantity = quantity;
-        Underlying = underlying;
-        Issuer = issuer;
+        OrderId     = orderId;
+        IsBuyOrder  = isBuyOrder;
+        Price       = price;
+        Quantity    = quantity;
+        Underlying  = underlying;
+        Issuer      = issuer;
     }
 
     public int OrderId { get; set; }

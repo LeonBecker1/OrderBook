@@ -20,12 +20,13 @@ public class MatchingEngine : IMatchingEngine
         _unitofWork = unitofWork;
     }
 
-    public void Match(List<Order> orders)
+    public async Task<int> Match(List<Order> orders)
     {
 
         (List<Order> buyOrders, List<Order> sellOrders) = SortAndSeperateOdersByType(orders);
 
-        MatchandExecuteOrders(buyOrders, sellOrders);        
+        return await MatchandExecuteOrders(buyOrders, sellOrders);
+
     }
 
     private (List<Order>, List<Order>) SortAndSeperateOdersByType(List<Order> orders)
@@ -54,7 +55,7 @@ public class MatchingEngine : IMatchingEngine
         return (buyOrders, sellOrders);
     }
 
-    private void MatchandExecuteOrders(List<Order> buyOrders, List<Order> sellOrders)
+    private async Task<int> MatchandExecuteOrders(List<Order> buyOrders, List<Order> sellOrders)
     {
         while (buyOrders[0].Price >= sellOrders[0].Price)
         {
@@ -63,12 +64,12 @@ public class MatchingEngine : IMatchingEngine
 
             if (buyOrders[0].Quantity > sellOrders[0].Quantity)
             {
-                _unitofWork.Orders.EditOrder(buyOrders[0],
+                await _unitofWork.Orders.EditOrder(buyOrders[0],
                                              buyOrders[0].Quantity - sellOrders[0].Quantity);
 
                 buyOrders[0].Quantity -= sellOrders[0].Quantity;
 
-                _unitofWork.Orders.DeleteOrder(sellOrders[0]);
+                await _unitofWork.Orders.DeleteOrder(sellOrders[0]);
 
                 buyerDelta *= sellOrders[0].Quantity;
                 sellerDelta *= sellOrders[0].Quantity;
@@ -76,12 +77,12 @@ public class MatchingEngine : IMatchingEngine
 
             else if (buyOrders[0].Quantity < sellOrders[0].Quantity)
             {
-                _unitofWork.Orders.EditOrder(sellOrders[0],
+                await _unitofWork.Orders.EditOrder(sellOrders[0],
                                              sellOrders[0].Quantity - buyOrders[0].Quantity);
 
                 sellOrders[0].Quantity -= buyOrders[0].Quantity;
 
-                _unitofWork.Orders.DeleteOrder(buyOrders[0]);
+                await _unitofWork.Orders.DeleteOrder(buyOrders[0]);
 
                 buyerDelta *= buyOrders[0].Quantity;
                 sellerDelta *= buyOrders[0].Quantity;
@@ -92,11 +93,14 @@ public class MatchingEngine : IMatchingEngine
             User seller = sellOrders[0].Issuer;
             seller.Balance -= sellerDelta;
 
-            _unitofWork.Users.EditBalance(buyer);
-            _unitofWork.Users.EditBalance(seller);
+            await _unitofWork.Users.EditBalance(buyer);
+            await _unitofWork.Users.EditBalance(seller);
 
             Sale sale = new Sale(0, DateTime.UtcNow, buyOrders[0].Underlying, buyer, seller);
-            _unitofWork.Sales.AddSale(sale);
+            await _unitofWork.Sales.AddSale(sale);
+
+           
         }
+        return 0;
     }
 }

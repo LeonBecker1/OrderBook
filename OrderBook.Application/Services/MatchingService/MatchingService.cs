@@ -14,9 +14,12 @@ public class MatchingService : BackgroundService, IMatchingService
 
     private readonly IUnitofWork _unitofWork;
 
-    public MatchingService(IUnitofWork unitofWork)
+    private readonly IMatchingEngine _matchingEngine;
+
+    public MatchingService(IUnitofWork unitofWork, IMatchingEngine matchingEngine)
     {
-        _unitofWork = unitofWork;
+        _unitofWork     = unitofWork;
+        _matchingEngine = matchingEngine;
     }
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -27,8 +30,8 @@ public class MatchingService : BackgroundService, IMatchingService
 
             foreach(Stock stock in _unitofWork.Stocks.GetAll().Result)
             {
-                List<Order> ordersByUnderlying = _unitofWork.Orders.FindByUnderlying(stock).Result;
-
+                List<Order> ordersByUnderlying = await _unitofWork.Orders.FindByUnderlying(stock)!;
+                await _matchingEngine.Match(ordersByUnderlying);
 
             }
         }
