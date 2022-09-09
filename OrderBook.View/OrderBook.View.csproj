@@ -12,7 +12,6 @@
 	</ItemGroup>
 	
 	<ItemGroup>
-	  <Folder Include="Views\Authentication\" />
 	  <Folder Include="Views\Order\" />
 	</ItemGroup>
 	

@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 using OrderBook.Application.Services.AuthenticationService;
 using OrderBook.Infrastructure.Persistence;
 using OrderBook.Application.Exceptions;
-
+using OrderBook.Application.Persistence;
 namespace OrderBook.Infrastructure.Authentication;
 
 public class AuthenticationService : IAuthenticationservice
 {
-    private readonly UnitofWork _unitofWork;
+    private readonly IUnitofWork _unitofWork;
 
     private readonly IPasswordverifyer _passwordverifyer;
 
-    public AuthenticationService(IPasswordverifyer passwordverifyer, UnitofWork unitofWork)
+    public AuthenticationService(IPasswordverifyer passwordverifyer, IUnitofWork unitofWork)
     {
         _passwordverifyer = passwordverifyer;
         _unitofWork       = unitofWork;

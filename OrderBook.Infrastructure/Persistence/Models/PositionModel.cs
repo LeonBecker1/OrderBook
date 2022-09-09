@@ -33,7 +33,8 @@ public class PositionModel
     [Column("Stock")]
     public StockModel Stock { get; set; } = null!;
 
-
+    [Required]
+    public PortfolioModel Portfolio { get; set; } = null!;
 
     public int PortfolioFK { get; set; }
 
