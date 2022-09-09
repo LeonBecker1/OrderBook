@@ -30,7 +30,7 @@ Additionally, there is also support for a minimalistic form of authentication.
 
 This project was built with a focus on segregating domain specific logic form technical details. For this purpose, a hexagonal architecutre was utilized, as ilustrated through the screenshot bellow.
 
-![Alt text](https://github.com/LeonBecker1/OrderBook/blob/master/MD-Ressources/Frame 5.png "Optional title")
+![Alt text](https://github.com/LeonBecker1/OrderBook/blob/master/MD-Ressources/Architecture.png "Optional title")
 
 Each of these Areas get represented by a seperate C# project, as seen by the source code.
 
