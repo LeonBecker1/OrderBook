@@ -4,6 +4,7 @@
 * Functionality
 * Architecture
 * How to get started
+* Milestones
 
 ## Functionality
 
@@ -41,4 +42,14 @@ Heavy use of dependency injection and the repository pattern furtheremore lead t
 1. Clone the repository
 2. Edit the connection string, that can be found in the OrderBookDBContext.cs file, such that you are connected with your preferred local database
 3. Update your database by running the migration script.
-4. Start the OrderBook.View 
+4. Start the OrderBook.View
+
+## Milestones
+
+0. Identify requirements    ✅ 
+1. Create Database schema   ✅
+2. Run migration    ✅
+3. Implement and test data access logic   ⌛
+4. Implement and testapplication-layer logix    ⌛
+5. Create views, viewmodels and controllers   ⌛
+
