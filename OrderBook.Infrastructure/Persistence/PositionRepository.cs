@@ -67,4 +67,25 @@ public class PositionRepository : Repository<Position>, IPositionRepository
         return result;
     }
 
+    public async Task<List<Position>> FindByUser(string username)
+    {
+        UserModel userModel = _context.Set<UserModel>().First(u => u.UserName == username);
+        PortfolioModel portfolio = _context.Set<PortfolioModel>().First(p => p.PortfolioId == userModel.PortfolioFK);
+
+        List<PositionModel> positions = _context.Set<PositionModel>()
+                                                      .Where(p => p.PortfolioFK == portfolio.PortfolioId).ToList();
+
+        List<Position> result = new List<Position>();
+        foreach (var position in positions)
+        {
+            Stock stock = new Stock(position.Stock.StockId, position.Stock.Abreviation);
+            result.Add(new Position(position.PositionId, position.Quantity, stock));
+        }
+
+        await _context.SaveChangesAsync();
+
+        return result;
+
+    }
+
 }

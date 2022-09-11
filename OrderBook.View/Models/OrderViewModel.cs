@@ -7,8 +7,16 @@ namespace OrderBook.View.Models;
 
 public class OrderViewModel
 {
-    [Required(ErrorMessage = "Chosing a stock is required")]
 
+    public OrderViewModel(string underlying, decimal price, uint quantity, bool isBuy)
+    {
+        Underlying  = underlying;
+        Price       = price;
+        Quantity    = (int)quantity;
+        IsBuy       = isBuy;
+    }
+
+    [Required(ErrorMessage = "Chosing a stock is required")]
     public string Underlying { get; set; }
 
     [Required(ErrorMessage = "Chosing a price is required")]

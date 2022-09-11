@@ -34,4 +34,17 @@ public class StockRepository : Repository<Stock>, IStockRepository
 
     }
 
+    public List<string> GetAllAbreviations()
+    {
+        List<StockModel> stockModels = _context.Set<StockModel>().ToList();
+
+        List<String> abreviations = new List<String>();
+
+        foreach (StockModel stockModel in stockModels)
+        {
+            abreviations.Add(stockModel.Abreviation);
+        }
+
+        return abreviations;
+    }
 }

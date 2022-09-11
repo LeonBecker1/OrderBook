@@ -14,4 +14,5 @@ public interface IOrderRepository : IRepository<Order>
     Task<Order> EditOrder(Order order, uint quantity);
     Task<Order> DeleteOrder(Order order);
     Task<List<Order>> FindByUnderlying(Stock stock);
+    List<Order> FindByUnderlying(String abreviation);
 }

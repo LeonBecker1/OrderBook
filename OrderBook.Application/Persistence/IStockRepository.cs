@@ -13,4 +13,6 @@ public interface IStockRepository : IRepository<Stock>
 
     Task<List<Stock>> GetAll();
 
+    List<String> GetAllAbreviations();
+
 }

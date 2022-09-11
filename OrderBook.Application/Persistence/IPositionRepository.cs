@@ -12,4 +12,5 @@ public interface IPositionRepository : IRepository<Position>
     Task<Position> AddPosition(Position position, int portfolioId);
     Task<Position> EditPosition(Position position, uint quantity);
     Task<Position> DeletePosition(Position position);
+    Task<List<Position>> FindByUser(String username);
 }

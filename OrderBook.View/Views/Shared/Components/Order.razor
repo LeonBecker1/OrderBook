@@ -1,7 +1,9 @@
 ﻿@using Microsoft.AspNetCore.Components
-
+@using OrderBook.Application.Persistence;
+@inject IUnitofWork _unitofWork;
 
 <body>
+    <h1>@x</h1>
     <button class="navigation">--</button>
     <div id="wrapper">
         <table id="stock">

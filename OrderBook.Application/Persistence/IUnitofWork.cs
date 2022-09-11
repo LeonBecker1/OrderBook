@@ -8,11 +8,12 @@ namespace OrderBook.Application.Persistence;
 
 public interface IUnitofWork : IDisposable
 {
-    IOrderRepository Orders { get; }
-    IUserRepository Users { get; }
-    IStockRepository Stocks { get; }
-    IPortfolioRepository Portfolios { get; }
-    ISaleRepository Sales { get; }
+    IOrderRepository        Orders { get; }
+    IUserRepository         Users { get; }
+    IStockRepository        Stocks { get; }
+    IPortfolioRepository    Portfolios { get; }
+    ISaleRepository         Sales { get; }
+    IPositionRepository     Positions { get; }
 
     int Complete();
 

@@ -1,6 +1,5 @@
 ﻿namespace OrderBook.View.Models;
 
-public class RegisterViewModel
+public interface IMapper
 {
-
 }

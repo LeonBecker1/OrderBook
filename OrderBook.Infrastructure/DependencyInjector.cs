@@ -29,6 +29,7 @@ public static class DependenyInjector
         services.AddScoped<ISaleRepository, SaleRepository>();
         services.AddScoped<IOrderRepository, OrderRepository>();
         services.AddScoped<IStockRepository, StockRepository>();
+        services.AddScoped<IPositionRepository, PositionRepository>();
         services.AddScoped<IPasswordverifyer, PasswordVerifyer>();
         services.AddScoped<IAuthenticationservice, AuthenticationService>();
         services.AddScoped<IUnitofWork, UnitofWork>();

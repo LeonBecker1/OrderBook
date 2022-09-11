@@ -8,6 +8,7 @@ using OrderBook.Application.Persistence;
 using OrderBook.Domain.Entities;
 using OrderBook.Infrastructure.Persistence.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Collections;
 
 namespace OrderBook.Infrastructure.Persistence;
 
@@ -66,6 +67,24 @@ public class OrderRepository : Repository<Order>, IOrderRepository
         await _context.SaveChangesAsync();
         return orderList;
 
+    }
+
+    public List<Order> FindByUnderlying(String abreviation)
+    {
+        StockModel stockModel = _context.Set<StockModel>().First(s => s.Abreviation == abreviation);
+
+        Stock stock = new Stock(stockModel.StockId, stockModel.Abreviation);
+
+        List<Order> orderList = new List<Order>();
+        List<OrderModel> orderModels = _context.Set<OrderModel>().Where(om => om.Underlying == stockModel).ToList();
+
+        foreach (OrderModel orderModel in orderModels)
+        {
+            orderList.Add(new Order(orderModel.OrderId, orderModel.IsBuyOrder, orderModel.Price, orderModel.Quantity, stock, null!));
+        }
+
+      
+        return orderList;
     }
 
     public async Task<Order> DeleteOrder(Order order)

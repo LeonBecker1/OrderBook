@@ -21,6 +21,7 @@ public class UnitofWork : IUnitofWork
         Stocks      = new StockRepository(_context);
         Sales       = new SaleRepository(_context);
         Portfolios  = new PortfolioRepository(_context);
+        Positions = new PositionRepository(context);
         
     }
 
@@ -33,6 +34,8 @@ public class UnitofWork : IUnitofWork
     public ISaleRepository Sales { get; private set; }
 
     public IPortfolioRepository Portfolios { get; private set; }
+
+    public IPositionRepository Positions { get; private set; }
 
     public int Complete()
     {
