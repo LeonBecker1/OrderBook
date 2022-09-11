@@ -5,6 +5,10 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="Views\Shared\Components\Order.razor.razor" />
+  </ItemGroup>
 	
 	<ItemGroup>
 		<ProjectReference Include="..\OrderBook.Application\OrderBook.Application.csproj" />
@@ -15,6 +19,7 @@
 	  <PackageReference Include="Microsoft.AspNetCore.Components" Version="6.0.8" />
 	  <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.8" />
 	  <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.8" />
+	  <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.2.5" />
 	  <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.8" />
 	  <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.8">
 	    <PrivateAssets>all</PrivateAssets>
