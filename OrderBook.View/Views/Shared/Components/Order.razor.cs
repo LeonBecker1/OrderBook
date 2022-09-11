@@ -23,8 +23,9 @@ public partial class Order : ComponentBase
     {
         stocks       = _unitofWork.Stocks.GetAllAbreviations();
         activeStock  = stocks[0];
-        activeOrders = Mapper.map(_unitofWork.Orders.FindByUnderlying(activeStock));
+        activeOrders = Mapper.map(_unitofWork.Orders.FindByUser(activeUser.UserName));
         positions    = Mapper.map(_unitofWork.Positions.FindByUser(activeUser.UserName).Result);
+        orders       = Mapper.map(_unitofWork.Orders.FindByUnderlying(activeStock));
 
         base.OnInitializedAsync();
     }

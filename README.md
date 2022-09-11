@@ -38,7 +38,7 @@ Each of these Areas get represented by a seperate C# project, as seen by the sou
 Heavy use of dependency injection and the repository pattern furtheremore lead to looser coupling and a stronger seperation of concerns.
 
 ### The Database schema is seen bellow
-![Alt text](https://github.com/LeonBecker1/OrderBook/blob/master/MD-Ressources/ER1.png "Optional title")
+![Alt text](https://github.com/LeonBecker1/OrderBook/blob/master/MD-Ressources/ER-Diagram2.png "Optional title")
 
 ## How to get started
 

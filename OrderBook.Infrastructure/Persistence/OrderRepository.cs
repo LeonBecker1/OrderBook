@@ -87,6 +87,11 @@ public class OrderRepository : Repository<Order>, IOrderRepository
         return orderList;
     }
 
+    public List<Order> FindByUser(String username)
+    {
+        throw new NotImplementedException();
+    }
+
     public async Task<Order> DeleteOrder(Order order)
     {
         OrderModel orderModel = _context.Set<OrderModel>().Find(order.OrderId)!;
