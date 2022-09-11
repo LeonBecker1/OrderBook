@@ -1,0 +1,6 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+<div>
+    @(await Html.RenderComponentAsync<OrderBook.View.Views.Shared.Components.Order>(RenderMode.ServerPrerendered))
+</div>

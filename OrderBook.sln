@@ -12,9 +12,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderBook.Application", "Or
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderBook.Tests", "OrderBook.Tests\OrderBook.Tests.csproj", "{3808FB8B-45D0-4051-9F44-38A5F5306330}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderBook.Infrastructure", "OrderBook.Infrastructure\OrderBook.Infrastructure.csproj", "{B2FD8450-2AE0-45C7-BC01-B747C9C86C5A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderBook.Infrastructure", "OrderBook.Infrastructure\OrderBook.Infrastructure.csproj", "{B2FD8450-2AE0-45C7-BC01-B747C9C86C5A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderBook.View", "OrderBook.View\OrderBook.View.csproj", "{C30F2D98-7E5E-4DD4-B610-D9B719B85132}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderBook.View", "OrderBook.View\OrderBook.View.csproj", "{C30F2D98-7E5E-4DD4-B610-D9B719B85132}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
